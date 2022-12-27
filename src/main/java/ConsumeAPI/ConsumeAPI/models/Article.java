@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +22,6 @@ public class Article {
     @JsonProperty("abstract")
     private String summary;
 
-    //private List<Media> media;
+    private List<Media> media;
     private String imageUrl;
 }
