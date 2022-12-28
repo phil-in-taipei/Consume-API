@@ -1,6 +1,7 @@
 package ConsumeAPI.ConsumeAPI.services;
 
 import ConsumeAPI.ConsumeAPI.models.Article;
+import ConsumeAPI.ConsumeAPI.models.Media;
 import ConsumeAPI.ConsumeAPI.models.NytResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,9 +30,14 @@ public class ArticleService {
         );
         List<Article> results = new ArrayList<>();
         if (response != null && response.getStatus().equals("OK")) {
-            return response.getResults();
-        } else {
-            return results;
+            results = response.getResults();
+            for (Article result : results) {
+                List<Media> media = result.getMedia();
+                for (Media m : media) {
+                    result.setImageUrl(m.getMediaMetadata().get(0).getUrl());
+                }
+            }
         }
+        return results;
     }
 }
