@@ -45,12 +45,11 @@ public class ArticleService {
     }
 
 
-    public void getSearchResults(String url) {
+    public NytSearchResponse getSearchResults(String url) {
         System.out.println("Starting the api call in getSearchResults service method");
         ResponseEntity<NytSearchResponse> responseEntity =
                 restTemplate.getForEntity(
-                        "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=covid&api-key=BkJ6qLP6ZPE8meeXpqlFU1Q3uIXRPSy1",
-                        //"https://www.boredapi.com/api/activity?participants={participants}",
+                        "https://api.nytimes.com/svc/search/v2/articlesearch.json?q={url}&api-key=BkJ6qLP6ZPE8meeXpqlFU1Q3uIXRPSy1",
                         NytSearchResponse.class,
                         1
                 );
@@ -60,8 +59,13 @@ public class ArticleService {
             NytSearchResponse nytSearchResponse = responseEntity.getBody();
             System.out.println("This is the nytSearchResponse");
             System.out.println(nytSearchResponse.toString());
+            return nytSearchResponse;
         } else {
             System.out.println("Something went wrong! The response was not marked with status code 200");
+            System.out.println(responseEntity.getStatusCode());
+
+            return new NytSearchResponse();
         }
+
     }
 }

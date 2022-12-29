@@ -19,7 +19,7 @@ public class Doc {
 
     String source;
 
-    @JsonProperty("web_url")
+    @JsonProperty("pub_date")
     String pubDate;
 
     @JsonProperty("document_type")
