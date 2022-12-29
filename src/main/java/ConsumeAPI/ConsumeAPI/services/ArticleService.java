@@ -61,12 +61,12 @@ public class ArticleService {
 
     }
 
-    public List<Doc> getSearchResults(String url) {
-        System.out.println("Starting the api call in getSearchResults service method: " + url);
+    public List<Doc> getSearchResults(String searchKeyword) {
+        System.out.println("Starting the api call in getSearchResults service method: " + searchKeyword);
         ResponseEntity<NytSearchResponse> responseEntity =
                 restTemplate.getForEntity(
                         "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="
-                                + url+ "&api-key=BkJ6qLP6ZPE8meeXpqlFU1Q3uIXRPSy1",
+                                + searchKeyword + "&api-key=BkJ6qLP6ZPE8meeXpqlFU1Q3uIXRPSy1",
                         NytSearchResponse.class,
                         1
                 );

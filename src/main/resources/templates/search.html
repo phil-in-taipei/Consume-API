@@ -13,7 +13,7 @@
         <div align="center" class="container-md p-5 my-5 bg-dark text-white rounded">
             <h2>Search for News by Keyword</h2>
             <form th:action="@{/search-results}"  method="post">
-                <input type="text" th:value="${url}" name="url"/>
+                <input type="text" th:value="${searchKeyword}" name="searchKeyword"/>
                 <input type="submit" />
             </form>
         </div>

@@ -21,20 +21,20 @@ public class ArticleController {
 
     @GetMapping("/search")
     public String search(Model model) {
-        String url = new String();
-        model.addAttribute("url", url);
+        String searchKeyword = new String();
+        model.addAttribute("searchKeyword", searchKeyword);
         return "search";
     }
 
     @PostMapping("/search-results")
-    public String searchResult(Model model, @RequestParam String url) {
+    public String searchResult(Model model, @RequestParam String searchKeyword) {
         model.addAttribute(
                 "articleList",
-                articleService.getSearchResults(url)
+                articleService.getSearchResults(searchKeyword)
         );
         model.addAttribute(
-                "searchItem",
-                url
+                "searchKeyword",
+                searchKeyword
         );
         return "search-results";
     }
