@@ -19,6 +19,10 @@ public class Doc {
 
     String source;
 
+    List<Multimedia> multimedia;
+
+    Headline headline;
+
     @JsonProperty("pub_date")
     String pubDate;
 
@@ -31,11 +35,15 @@ public class Doc {
     @JsonProperty("section_name")
     String sectionName;
 
+    Byline byline;
+
     @JsonProperty("type_of_material")
     String typeOfMaterial;
 
 
     @JsonProperty("word_count")
     int wordCount;
+
+    private String imageUrl;
 
 }

@@ -1090,3 +1090,7 @@
                 "word_count": 834,
                 "uri": "nyt://article/c8ed12a9-9ecc-50ba-abd6-e1b8b7243f4c"
             }
+            
+            https://static01.nyt.com/images/2022/08/05/business/05carried-explain/merlin_211047933_57dc8e8f-f16c-43d6-9b0a-7aa269d07c8f-mobileMasterAt3x.jpg
+            
+            https://static01.nyt.com/images/2022/12/26/multimedia/26santos-1-1718/26santos-1-1718-thumbStandard.jpg

@@ -1,9 +1,6 @@
 package ConsumeAPI.ConsumeAPI.services;
 
-import ConsumeAPI.ConsumeAPI.models.Article;
-import ConsumeAPI.ConsumeAPI.models.Media;
-import ConsumeAPI.ConsumeAPI.models.NytResponse;
-import ConsumeAPI.ConsumeAPI.models.NytSearchResponse;
+import ConsumeAPI.ConsumeAPI.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +42,7 @@ public class ArticleService {
     }
 
 
-    public NytSearchResponse getSearchResults(String url) {
+    public NytSearchResponse getSearchResultsResponse(String url) {
         System.out.println("Starting the api call in getSearchResults service method");
         ResponseEntity<NytSearchResponse> responseEntity =
                 restTemplate.getForEntity(
@@ -54,17 +51,38 @@ public class ArticleService {
                         1
                 );
         if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
-            System.out.println("The api request has gone through");
-
             NytSearchResponse nytSearchResponse = responseEntity.getBody();
-            System.out.println("This is the nytSearchResponse");
-            System.out.println(nytSearchResponse.toString());
             return nytSearchResponse;
         } else {
             System.out.println("Something went wrong! The response was not marked with status code 200");
             System.out.println(responseEntity.getStatusCode());
-
             return new NytSearchResponse();
+        }
+
+    }
+
+    public List<Doc> getSearchResults(String url) {
+        System.out.println("Starting the api call in getSearchResults service method");
+        ResponseEntity<NytSearchResponse> responseEntity =
+                restTemplate.getForEntity(
+                        "https://api.nytimes.com/svc/search/v2/articlesearch.json?q={url}&api-key=BkJ6qLP6ZPE8meeXpqlFU1Q3uIXRPSy1",
+                        NytSearchResponse.class,
+                        1
+                );
+        if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
+            NytSearchResponse nytSearchResponse = responseEntity.getBody();
+            List<Doc> docsInResponse = nytSearchResponse.getResponse().getDocs();
+            for (Doc doc : docsInResponse) {
+                List<Multimedia> media = doc.getMultimedia();
+                for (Multimedia m : media) {
+                    doc.setImageUrl("https://static01.nyt.com/" + m.getUrl());
+                }
+            }
+            return docsInResponse;
+        } else {
+            System.out.println("Something went wrong! The response was not marked with status code 200");
+            System.out.println(responseEntity.getStatusCode());
+            return new NytSearchResponse().getResponse().getDocs();
         }
 
     }

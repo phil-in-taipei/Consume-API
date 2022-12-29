@@ -1,6 +1,7 @@
 package ConsumeAPI.ConsumeAPI.controllers;
 
 import ConsumeAPI.ConsumeAPI.models.Article;
+import ConsumeAPI.ConsumeAPI.models.Doc;
 import ConsumeAPI.ConsumeAPI.models.NytSearchResponse;
 import ConsumeAPI.ConsumeAPI.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class NytTestController {
     }
 
     @GetMapping("/nyt/search/test")
-    public NytSearchResponse getSearchResults() {
+    public List<Doc> getSearchResults() {
         return articleService.getSearchResults("covid");
     }
 

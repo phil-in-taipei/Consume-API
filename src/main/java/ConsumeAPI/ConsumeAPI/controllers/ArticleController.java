@@ -18,4 +18,13 @@ public class ArticleController {
         return "index";
     }
 
+    @GetMapping("/search")
+    public String searchResult(Model model) {
+        model.addAttribute(
+                "articleList",
+                articleService.getSearchResults("covid")
+        );
+        return "search-results";
+    }
+
 }
