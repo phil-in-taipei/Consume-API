@@ -76,7 +76,9 @@ public class ArticleService {
             for (Doc doc : docsInResponse) {
                 List<Multimedia> media = doc.getMultimedia();
                 for (Multimedia m : media) {
-                    doc.setImageUrl("https://static01.nyt.com/" + m.getUrl());
+                    if (m.getSubtype().equals("largeHorizontal375")) {
+                        doc.setImageUrl("https://static01.nyt.com/" + m.getUrl());
+                    }
                 }
             }
             return docsInResponse;
